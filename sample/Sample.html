@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=1200" />
+    <title>Happy Hour</title>
+    <link href="sample.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|Droid+Sans+Mono&v2">
+  </head>
+  <body>
+    <div id="presentation">
+		<div class="slide title">
+			<h1>Happy Hour</h1>
+		</div>
+		<div class="slide">
+			<h1>Dart: Structured Web Programming</h1>
+			<ul>
+				<li>새로운 언어 입니다.</li>
+				<li>새로운 도구를 가지고 있습니다.</li>
+				<li>새로운 라이브러리로 되어있습니다.</li>
+				<li>공개 소스 프로젝트 입니다.</li>
+				<li><a href="http://dart.googlecode.com">Google Code에서 확인하실 수 있습니다.</a></li>
+				<li>아직은 TECHNOLOGY PREVIEW 상태입니다.</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>코드 살펴보기</h1>
+			<div>
+				<pre>
+				
+				interface Shape {
+				  perimeter(); // return type optional
+				}
+				
+				class Rectangle implements Shape {
+				  final num height, width; 
+				  // Compact constructor syntax
+				  Rectangle(num this.height, num this.width);
+				  // Terse function syntax
+				  perimeter() => 2*height + 2*width;
+				}
+				
+				class Square extends Rectangle {
+				  Square(num size) : super(size, size);
+				}
+				
+				main() {
+				  var p = new Square(5).perimeter(); // dynamic type
+				  print('Perimeter=$p'); // String interpolation
+				}
+				</pre>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>이벤트 할당 해보기</h1>
+			<div>
+				<pre>
+				
+ elem.on.click.add(  (event) => print('click!') );
+				</pre>
+				<pre>
+				
+ addHandlers() {
+   canvasElement.onmousemove = onMouseMove;
+   // No anonymous inner classes!
+   canvasElement.onmousedown = (Event e){ 
+   					    window.alert('click');
+   					};
+ }
+
+ onMouseMove(MouseEvent event) {
+   int x = event.offsetX;
+   int y = event.offsetY - 40;
+   if (( y < 0) || (x >= width)) {
+     return;
+   }
+   ctx.setFillStyle(getHexString(getColorIndex(x, y)));
+   ctx.fillRect(0, 0, width/2, 30);
+ }
+				</pre>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>Getter와 Setter</h1>
+			<div>
+				<pre>
+				
+				String get selectedColor() => _selectedColor;
+
+				void set selectedColor(num i) {
+				  _selectedColor = getHexString(i.floor());
+				  showSelected();
+				  fireSelected();
+				}
+				</pre>
+				<pre>
+				
+					newColor = selectedColor;
+				</pre>
+				<pre>
+				
+					selectedColor = getColorIndex(x, y);
+				</pre>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>Isolates</h1>
+			<ul>
+				<li>Erlang에서 영감을 받았습니다.</li>
+				<li>각 isolate는 개념적으로 process입니다.</li>
+				<li>공유 되지 않습니다.</li>
+				<li>모든 통신이 Message Passing으로 이루어집니다.</li>
+				<li>동시 실행을 지원합니다.</li>
+			</ul>
+		</div>
+		<div class="slide">
+			<h1>Dart Editor</h1>
+			<div class="center">
+				<img src="./img/editor.png" width="640px">
+			</div>
+		</div>
+		<div class="slide">
+			<h1>Javascript 개발자들에게 유리한 점은?</h1>
+			<ul>
+				<li>Type 선언이 좀 더 강력합니다.</li>
+				<li>Class</li>
+				<li>Scope가 명확합니다.</li>
+				<li>실행이 빠릅니다.</li>
+				<li>DOM을 개선합니다.</li>
+			</ul>
+		</div>
+		<div class="slide title">
+			<h1>질문</h1>
+		</div>
+		<div class="slide">
+			<h1>일정 안내</h1>
+			<ul>
+				<li>10:00~10:30 : 팀 정하기 및 프로젝트 소개하기</li>
+				<li>10:30~12:00 : 해킹 1부!!</li>
+				<li>12:00~13:00 : 점심 식사</li>
+				<li>13:00~18:30 : 해킹 2부!!</li>
+				<li>18:30~20:00 : 프로젝트 발표 및 시상식</li>
+			</ul>
+		</div>
+		<div class="slide title">
+			<h1>팀 정하기 및 소개</h1>
+		</div>
+		<div class="slide title">
+			<h1>Hack!!</h1>
+		</div>
+		<div class="slide title">
+			<h1>식사 시간</h1>
+		</div>
+		<div class="slide title">
+			<h1>발표</h1>
+		</div>
+		<div class="slide title">
+			<h1>시상식</h1>
+		</div>
+		<div class="slide title">
+			<h1>수고하셨습니다!!</h1>
+		</div>
+	</div>
+    <script type="application/dart" src="sample.dart"></script>
+    <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+  </body>
+</html>
