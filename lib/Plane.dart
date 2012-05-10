@@ -5,20 +5,30 @@
 class Plane extends fxPresenti {
   Element element;
   ElementList slides;
+  int current;
+  int nextStep;
   int margin;
   num ratio;
   int originalWidth;
   int originalHeight;
   int maxHeight;
+  
+  Plane( String sWrapSelector, String sSlideSelector, int iMargin, int iMaxHeight ){
+    var elPresent = document.query(sWrapSelector);
+    var elSlides = elPresent.queryAll(sSlideSelector);
+    var iRatio = 0;
+    
+    element = elPresent;
+    slides = elSlides;
 
-  void setOptions( Element el, ElementList a, int b, num c, int d, int e, int f ){
-    element = el;
-    slides = a;
-    margin = b;
-    ratio = c;
-    originalWidth = d;
-    originalHeight = e;
-    maxHeight = f;
+    ratio = elSlides[0].$dom_clientWidth / elSlides[0].$dom_clientHeight;
+    originalWidth = elSlides[0].$dom_clientWidth;
+    originalHeight = elSlides[0].$dom_clientHeight;
+    margin = iMargin;
+    maxHeight = iMaxHeight;
+    current = 0;
+    nextStep = 0;
+    
   }
 
   void setPosition(){
@@ -63,15 +73,36 @@ class Plane extends fxPresenti {
       i++;
     });
   }
+  
+  void slideAction(bool action){
+    switch(action){
+      case true:
+        ElementList nextSlides = slides[current].queryAll(".next");
+      print(nextSlides);
+        if( nextSlides.length > 0 && nextStep <= (nextSlides.length-1) ){
+          nextSlides[nextStep++].style.display = "block";
+        }else{
+          if( current < slides.length ) current++;
+          window.scrollBy(( slides[0].$dom_clientWidth + 154 ), 0);
+          nextStep = 0;
+        }
+        break;
+      case false:
+        if( current > 0 ) current--;
+        window.scrollBy(((slides[0].$dom_clientWidth+154)*-1), 0);
+        break;
+    }
+    print(current);
+  }
 
-  Plane.fireEvent(ElementList slides) : super.fireEvent(slides){
+  void fireEvent() {
     document.on.keyDown.add(function(event){
       switch(event.keyCode){
         case 32:
-          window.scrollBy(( slides[0].$dom_clientWidth + 150 ), 0);
+          slideAction(true);
           break;
         case 8:
-          window.scrollBy(((slides[0].$dom_clientWidth+150)*-1), 0);
+          slideAction(false);
           event.preventDefault();
           break;
       }

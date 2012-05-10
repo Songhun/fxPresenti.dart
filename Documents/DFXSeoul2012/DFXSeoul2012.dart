@@ -1,5 +1,5 @@
 #import('dart:html');
-#import('../lib/Plane.dart');
+#import('../../lib/Plane.dart');
 
 void main() {
 

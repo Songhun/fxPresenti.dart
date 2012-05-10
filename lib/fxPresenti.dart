@@ -13,6 +13,5 @@ class fxPresenti implements Presenti {
   fxPresenti(){}
   void setPosition(){}
   void resizeSlide(){}
-  fxPresenti.fireEvent(ElementList slides){}
-
+  void fireEvent(){}
 }

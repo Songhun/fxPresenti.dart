@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=1200" />
+    <title>DFXSeoul2012</title>
+    <link href="DFXSeoul2012.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|Droid+Sans+Mono&v2">
+  </head>
+  <body>
+    <div id="presentation">
+		<div class="slide title">
+			<h1>fxPresenti.dart</h1>
+			<div style="margin:0px 35px;"><img src="img/dfxkorea_title.png" width="300px"></div>
+		</div>
+		<div class="slide">
+			<h1>fxPresenti.dart</h1>
+			<ul>
+				<li class="next">Dart로 짜여진 Presentation Tool입니다.</li>
+				<li class="next">아직 Ver0.02 입니다.</li>
+				<li class="next">아직은 Plane패턴만 존재합니다.</li>
+				<li class="next">공개 소스 프로젝트 입니다.</li>
+				<li class="next"><a href="https://github.com/Songhun/fxPresenti.dart">Fork!! 해주세요!!</a></li>
+			</ul>
+		</div>
+		<div class="slide title">
+			<h1 class="next">사실은!!</h1>
+		</div>
+		<div class="slide">
+			<h1>구조</h1>
+			<div>
+				<span style="color:blue;">fxPresenti.dart</span>
+				<pre>
+				
+  interface Presenti {
+    void setPosition();
+    void resizeSlide();
+  }
+	
+  class fxPresenti implements Presenti {
+    fxPresenti(){}
+    void setPosition(){}
+    void resizeSlide(){}
+    void fireEvent(){}
+  }
+				</pre>
+				<span style="color:blue;">Plane.dart</span>
+				<pre>
+				
+  class Plane extends fxPresenti { ... }
+				</pre>
+			</div>
+		</div>
+		
+		<div class="slide">
+			<h1>dart:html 활용</h1>
+			<div>
+				<pre>
+		
+  /** CSS selector */			
+
+  var elPresent = document.query(sWrapSelector);
+  var elSlides = elPresent.queryAll(sSlideSelector);
+  
+  
+  /** Style을 바꾸기(javascript 스타일, 계산도 가능) */
+
+  el.style.margin = "0px 0px 0px 
+          ${(window.innerWidth - iWidth)/2}px";
+  
+          
+  /** Window와 Element의 값 */
+
+  var iMargin = window.innerHeight 
+               - element.$dom_clientHeight;
+  
+				</pre>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>이벤트 할당</h1>
+			<div>
+				<pre>
+	
+  // 키보드 이벤트 받기			
+  document.on.keyDown.add(function(event){
+    switch(event.keyCode){
+      case 32:
+        slideAction(true);
+        break;
+      case 8:
+        slideAction(false);
+        event.preventDefault();
+        break;
+    }
+  });
+
+  // Window Resize 체크
+  window.on.resize.add(function(event){
+    resizeSlide();
+    setPosition();
+  });
+    
+				</pre>
+			</div>
+		</div>
+		<div class="slide">
+			<h1>HTML과 main()</h1>
+			<div>
+				<span style="color:blue;">DFXSeoul2012.html</span>
+				<pre>
+				
+  &lt;script type="application/dart" src="DFXSeoul2012.dart"></script>
+				</pre>
+				<span style="color:blue;">DFXSeoul2012.dart</span>
+				<pre>
+				
+  #import('../../lib/Plane.dart');
+
+  void main() {
+    final String sWrapSelector = "#presentation";
+    final String sSlideSelector = ".slide";
+    final int iMargin = 300;
+    final int iMaxHeight = 600;
+
+    var Slide = new Plane(sWrapSelector, sSlideSelector, iMargin, iMaxHeight);
+    Slide.fireEvent();
+    Slide.resizeSlide();
+    Slide.setPosition(); 
+  }
+				</pre>			
+			</div>
+		</div>
+		<div class="slide">
+			<h1>앞으로의 계획은?</h1>
+			<ul>
+				<li class="next"><span style="color:blue;">Ver0.04</span></li>
+				<li class="next">Plane Pattern의 강화</li>
+				<li class="next">발표자 기능 강화</li>
+				<li class="next">서버기능 제공</li>
+				<li class="next"><span style="color:blue;">Ver0.06</span></li>
+				<li class="next">디자인 샘플 추가</li>
+				<li class="next">Prenzi 패턴 추가</li>
+			</ul>
+		</div>
+		<div class="slide title">
+			<h1 class="next">질문</h1>
+		</div>
+		<div class="slide title">
+			<h1 class="next">감사합니다!!</h1>
+		</div>
+	</div>
+    <script type="application/dart" src="DFXSeoul2012.dart"></script>
+    <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+  </body>
+</html>

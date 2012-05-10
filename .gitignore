@@ -17,6 +17,8 @@ sites/all/themes/README.txt
 .htaccess
 .children
 .project
+.idea
+.settings
 
 #for non core developer
 #only include "sites" folder without exclusions before
